@@ -16,9 +16,7 @@ pipeline {
         EXTERNAL_PORT = "${APP_EXPOSED_PORT}"
         CONTAINER_IMAGE = "${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
-    agent {
-        label 'docker'
-    }
+    agent any
     stages {
         stage('Build image') {
             steps {
