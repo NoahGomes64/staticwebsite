@@ -40,7 +40,7 @@ pipeline {
         stage('Test image') {
             steps {
                 script {
-                    bat 'curl -v 172.17.0.1:${APP_EXPOSED_PORT} | grep -i 'Dimension''
+                    bat "curl -v 172.17.0.1:${APP_EXPOSED_PORT} | grep -i 'Dimension'"
                 }
             }
         }
