@@ -23,7 +23,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    bat "docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                    Mon_Container=bat(script:  '@docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} .', returnStdout: true).trim()
                 }
             }
         }
