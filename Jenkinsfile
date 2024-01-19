@@ -21,14 +21,14 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                    bat 'docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} .'
                 }
             }
         }
         stage('Run container based on builded image') {
             steps {
                 script {
-                    sh """
+                    bat """
                         echo "Cleaning existing container if exist"
                         docker ps -a | grep -i ${IMAGE_NAME} && docker rm -f ${IMAGE_NAME}
                         docker run --name ${IMAGE_NAME} -d -p ${APP_EXPOSED_PORT}:${INTERNAL_PORT} ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
@@ -40,14 +40,14 @@ pipeline {
         stage('Test image') {
             steps {
                 script {
-                    sh "curl -v 172.17.0.1:${APP_EXPOSED_PORT} | grep -i 'Dimension'"
+                    bat 'curl -v 172.17.0.1:${APP_EXPOSED_PORT} | grep -i 'Dimension''
                 }
             }
         }
         stage('Clean container') {
             steps {
                 script {
-                    sh """
+                    bat """
                         docker stop ${IMAGE_NAME}
                         docker rm ${IMAGE_NAME}
                     """
@@ -57,7 +57,7 @@ pipeline {
         stage('Login and Push Image on docker hub') {
             steps {
                 script {
-                    sh """
+                    bat """
                         echo ${DOCKERHUB_PASSWORD} | docker login -u ${DOCKERHUB_ID} --password-stdin
                         docker push ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
                     """
@@ -68,7 +68,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh """
+                    bat """
                         echo  {\\"your_name\\":\\"${APP_NAME}\\",\\"container_image\\":\\"${CONTAINER_IMAGE}\\", \\"external_port\\":\\"${EXTERNAL_PORT}80\\", \\"internal_port\\":\\"${INTERNAL_PORT}\\"}  > data.json 
                         curl -v -X POST http://${STG_API_ENDPOINT}/staging -H 'Content-Type: application/json'  --data-binary @data.json  2>&1 | grep 200
                     """
@@ -84,7 +84,7 @@ pipeline {
 
             steps {
                 script {
-                    sh """
+                    bat """
                         echo  {\\"your_name\\":\\"${APP_NAME}\\",\\"container_image\\":\\"${CONTAINER_IMAGE}\\", \\"external_port\\":\\"${EXTERNAL_PORT}\\", \\"internal_port\\":\\"${INTERNAL_PORT}\\"}  > data.json 
                         curl -v -X POST http://${PROD_API_ENDPOINT}/prod -H 'Content-Type: application/json'  --data-binary @data.json  2>&1 | grep 200
                     """
