@@ -21,7 +21,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    Mon_Container=bat(script:  '@docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} .', returnStdout: true).trim()
+                   bat 'docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} .'
                 }
             }
         }
