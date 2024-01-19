@@ -1,6 +1,3 @@
-/* import shared library */
-@Library('slackNotifier')_
-
 pipeline {
     environment {
         IMAGE_NAME = "staticwebsite"
@@ -10,7 +7,7 @@ pipeline {
         PRODUCTION = "chocoapp-prod"
         DOCKERHUB_ID = "nono642"
         DOCKERHUB_PASSWORD = credentials('dockerhub_password')
-        APP_NAME = "ulrich"
+        APP_NAME = "noah"
         STG_API_ENDPOINT = "127.0.0.1:1993/"
         STG_APP_ENDPOINT = "127.0.0.1:8080/"
         PROD_API_ENDPOINT = "127.0.0.1:1993/"
