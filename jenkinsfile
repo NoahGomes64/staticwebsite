@@ -11,7 +11,7 @@ pipeline {
         DOCKERHUB_ID = "choco1992"
         DOCKERHUB_PASSWORD = credentials('dockerhub_password')
         APP_NAME = "ulrich"
-        STG_API_ENDPOINT = "ip10-0-0-3-cenjc18mjkegg872ced0-1993.direct.docker.labs.eazytraining.fr"
+        STG_API_ENDPOINT = "http://127.0.0.1:1993/"
         STG_APP_ENDPOINT = "ip10-0-0-3-cenjc18mjkegg872ced0-8080.direct.docker.labs.eazytraining.fr"
         PROD_API_ENDPOINT = "ip10-0-0-3-cenjc18mjkegg872ced0-1993.direct.docker.labs.eazytraining.fr"
         PROD_APP_ENDPOINT = "ip10-0-0-3-cenjc18mjkegg872ced0-80.direct.docker.labs.eazytraining.fr"
