@@ -18,13 +18,7 @@ pipeline {
     }
     agent any
     stages {
-        stage('Build image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} ."
-                }
-            }
-        }
+        
         stage('Run container based on builded image') {
             steps {
                 script {
